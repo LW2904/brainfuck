@@ -7,3 +7,4 @@ _[Wikipedia article](https://en.wikipedia.org/wiki/Brainfuck) on brainfuck._
 ### Contents
 
 - [node-brainfuck](https://github.com/LW2904/brainfuck/blob/master/node)
+- [brainfuck.c](https://github.com/LW2904/brainfuck/blob/master/c)
