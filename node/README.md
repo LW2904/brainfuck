@@ -1,4 +1,4 @@
-## brainfuck
+## node-brainfuck
 
 A [brainfuck](http://www.muppetlabs.com/~breadbox/bf/) interpreter written in JS. Ironic, really. At least it doesn't depend on anything.
 
