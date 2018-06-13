@@ -5,8 +5,6 @@
 int cls[MAX_LENGTH];
 int ins[MAX_LENGTH];
 
-int pc, args, xc, prog_len, l = 0;
-
 FILE *stream, *fopen();
 
 int main(int argc, char **argv)
@@ -16,7 +14,6 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	// int iind = 0;
 	int ilen = 0;
 	int *ptr = cls;
 	int *iptr = ins;
