@@ -19,18 +19,22 @@ const { bf } = require('@sturmwalzer/brainfuck');
 bf(', [ -> +< ] .');
 ```
 
-Optionally a function can be passed as the second argument to act as a callback, which will receive the following object as its only argument:
-
 ```typescript
-{
+interface BFCallback {
     index: number,
     cells: number[],
     pointer: number,
 }
+
+function bf(instr: string | NodeJS.ReadableStream, cb?: () => BFCallback)
 ```
 
+The first argument may also be a stream, note that the complete stream will first be buffered into memory, though. An optional callback function may also be passed, which will be called with some metadata once all instructions have been executed.
+
 ```javascript
-bf(', [ -> +< ] .', (meta) => {
-    console.log('completed brainfuck execution', meta.cells);
+const { createReadStream } = require('fs');
+
+bf(createReadStream('./brainfuck.txt'), (meta) => {
+    console.log(`last pointer index: ${meta.pointer}, cells: ${meta.cells}`);
 });
 ```
