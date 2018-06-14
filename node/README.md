@@ -29,7 +29,7 @@ interface BFCallback {
 function bf(instr: string | NodeJS.ReadableStream, cb?: () => BFCallback)
 ```
 
-The first argument may also be a stream, note that the complete stream will first be buffered into memory, though. An optional callback function may also be passed, which will be called with some metadata once all instructions have been executed.
+The first argument may also be a stream, note that all stream data will be buffered into memory before execution. An optional callback function may also be passed, which will be called with some metadata once all instructions have been executed.
 
 ```javascript
 const { createReadStream } = require('fs');
