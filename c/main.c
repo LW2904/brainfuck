@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	while ((iptr - ins) < ilen) {
 		printf("(ilen: %d) ins[%d]: %c - cls[%d]: %d\n", ilen, (int)(iptr - ins), (char)*iptr, (int)(ptr - cls), *ptr);
 
-		switch (*iptr++) {
+		switch (*iptr) {
 		case '+':
 			++*ptr;
 			break;
@@ -70,10 +70,15 @@ int main(int argc, char **argv)
 			}
 			break;
 		case ']':
-			printf("closing %c %d\n", (char)*iptr, blc);		
+			printf("closing %c %d\n", (char)*iptr, blc);
+
+			if (*ptr == 0) {
+				ptr++;
+				break;
+			}
 
 			--iptr;
-			while (blc > 0 || *iptr != ']') {
+			while (blc > 0 || *iptr != '[') {
 				if (*iptr == ']')
 					++blc;
 				if (*iptr == '[')
@@ -85,6 +90,8 @@ int main(int argc, char **argv)
 			--iptr;
 			break;
 		}
+
+		iptr++;
 	}
 	
 	putchar('\n');
