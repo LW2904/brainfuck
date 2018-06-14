@@ -14,26 +14,25 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	int ilen = 0;
-	int *ptr = cls;
-	int *iptr = ins;
+	int ilen = 0;		// Length of the ins array.
+	int *ptr = cls;		// Pointer to the current active cell.
+	int *iptr = ins;	// Pointer to the current instruction.
 
-	// Open file provided in first argument with read permissions.
 	stream = fopen(argv[1], "r");
 
+	// Read the brainfuck to execute from the given file.
 	while (ilen < MAX_LENGTH && (ins[ilen] = getc(stream)) != EOF)
 		ilen++;
 
 	fclose(stream);
 
+	// Initialize all cells to zero.
 	for (int i = 0; i < MAX_LENGTH; i++)
 		cls[i] = 0;
 
-	int blc = 0;
+	int blc = 0;		// Keep count of open bracket pairs.
 
 	while ((iptr - ins) < ilen) {
-		printf("(ilen: %d) ins[%d]: %c - cls[%d]: %d\n", ilen, (int)(iptr - ins), (char)*iptr, (int)(ptr - cls), *ptr);
-
 		switch (*iptr) {
 		case '+':
 			++*ptr;
@@ -54,39 +53,31 @@ int main(int argc, char **argv)
 			*ptr = getchar();
 			break;
 		case '[':
-			printf("opening %c %d\n", (char)*iptr, blc);
-
 			if (*ptr != 0)
 				break;
 
 			++iptr;
+			// Jump forwards to matching closing brace.
 			while (blc > 0 || *iptr != ']') {
-				if (*iptr == '[')
-					++blc;
-				if (*iptr == ']')
-					--blc;
+				blc += *iptr == '[' ? 1 : *iptr == ']' ? -1 : 0;
 
 				++iptr;
 			}
 			break;
 		case ']':
-			printf("closing %c %d\n", (char)*iptr, blc);
-
 			if (*ptr == 0) {
 				ptr++;
 				break;
 			}
 
 			--iptr;
+			// Jump backwards to matching opening brace.
 			while (blc > 0 || *iptr != '[') {
-				if (*iptr == ']')
-					++blc;
-				if (*iptr == '[')
-					--blc;
+				blc -= *iptr == '[' ? 1 : *iptr == ']' ? -1 : 0;
 
 				--iptr;
 			}
-			
+
 			--iptr;
 			break;
 		}
