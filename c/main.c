@@ -65,10 +65,8 @@ int main(int argc, char **argv)
 			}
 			break;
 		case ']':
-			if (*ptr == 0) {
-				ptr++;
+			if (*ptr == 0 && ptr++)
 				break;
-			}
 
 			--iptr;
 			// Jump backwards to matching opening brace.
