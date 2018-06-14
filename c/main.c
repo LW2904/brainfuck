@@ -2,15 +2,15 @@
 
 #define MAX_LENGTH 9999
 
-int cls[MAX_LENGTH];
 int ins[MAX_LENGTH];
+int cls[MAX_LENGTH];
 
 FILE *stream, *fopen();
 
 int main(int argc, char **argv)
 {
 	if (argc < 2) {
-		puts("expected arguments");
+		puts("Usage: <executable> <file name/path>");
 		return 1;
 	}
 
@@ -26,9 +26,7 @@ int main(int argc, char **argv)
 
 	fclose(stream);
 
-	// Initialize all cells to zero.
-	for (int i = 0; i < MAX_LENGTH; i++)
-		cls[i] = 0;
+        memset(cls, 0, MAX_LENGTH);
 
 	int blc = 0;		// Keep count of open bracket pairs.
 
