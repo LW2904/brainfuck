@@ -38,3 +38,9 @@ bf(createReadStream('./brainfuck.txt'), (meta) => {
     console.log(`last pointer index: ${meta.pointer}, cells: ${meta.cells}`);
 });
 ```
+
+### Tests
+
+```
+$ npm run tests
+```
